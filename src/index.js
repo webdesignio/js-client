@@ -109,7 +109,7 @@ function updateObject (ctx, { website, record }, { locals }) {
 
 function updatePage (ctx, { record }, { locals }) {
   const { clusterURL, websiteID } = ctx
-  const putLocation = `/api/v1/pages/${record._id}?website=${websiteID}`
+  const putLocation = `/api/v1/pages/${record.name}?website=${websiteID}`
   return putJSON(
     ctx,
     clusterURL + putLocation,
@@ -132,7 +132,7 @@ function putJSON (ctx, url, body) {
   return sendJSON(ctx, url, 'PUT', body)
 }
 
-function sendJSON ({ bearer }, url, method, body) {
+function sendJSON ({ bearer, fetch }, url, method, body) {
   return fetch(url, {
     method,
     headers: {
